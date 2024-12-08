@@ -96,18 +96,27 @@ export default async function ProductPage({ params, searchParams }: PageProps) {
             />
           </div>
 
-          {/* Product Info */}
-          <div className="flex flex-col  justify-center">
-            <h1 className="text-4xl font-bold mb-4">{product.name}</h1>
-            <div className="w-28 inline-block bg-[#007580] text-primary-foreground pl-4 py-1 rounded-full text-sm mb-6">
+                   {/* Product Info */}
+          <div className="flex flex-col mt-14">
+            <h1 className="text-[3rem] font-extrabold  mb-4 text-[#272343]">{product.name}</h1>
+            <div className="w-28 inline-block bg-[#007580] text-primary-foreground pl-4 py-3 rounded-full text-sm mb-6">
               ${product.price.toFixed(2)} USD
             </div>
-            <p className="text-gray-600 mb-8">
+            <br />
+            <hr />
+            <br />
+            <p className="text-gray-600 mb-10 ">
               {product.description}
             </p>
             <Button 
-              className="w-fit transition-all duration-300 hover:scale-105 bg-[#007580]"
+              className="w-fit py-6 px-8 transition-all duration-300 hover:scale-105 bg-[#007580]"
             >
+              
+              <ShoppingCart/>
+              Add To Cart
+            </Button>
+          </div>
+        </div>
               <ShoppingCart/>
               Add To Cart
             </Button>
