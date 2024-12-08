@@ -50,31 +50,34 @@ const products = [
   },
 ]
 
-type Params = {
-  params: {
-    id: string
-  }
+type PageProps = {
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 async function getProduct(id: string) {
-  // Simulate an API call or database query
+ 
   await new Promise(resolve => setTimeout(resolve, 100))
-  return products.find(p => p.id === id) || products[0]
+  return products.find(p => p.id === id) || null
 }
 
 async function getFeaturedProducts(id: string) {
-  // Simulate an API call or database query
+
   await new Promise(resolve => setTimeout(resolve, 100))
   return products.filter(p => p.id !== id)
 }
 
-export default async function ProductPage({ params }: Params) {
-  const { id } = params
+export default async function ProductPage({ params, searchParams }: PageProps) {
+  const { id } = await params
 
   const [product, featuredProducts] = await Promise.all([
     getProduct(id),
     getFeaturedProducts(id)
   ])
+
+  if (!product) {
+    return <div>Product not found</div>
+  }
 
   return (
     <Layout>
