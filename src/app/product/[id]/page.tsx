@@ -52,15 +52,30 @@ const products = [
 
 type Params = {
   params: {
-    id: any
+    id: string
   }
 }
 
-export default function ProductPage({ params }: Params) {
+async function getProduct(id: string) {
+  // Simulate an API call or database query
+  await new Promise(resolve => setTimeout(resolve, 100))
+  return products.find(p => p.id === id) || products[0]
+}
+
+async function getFeaturedProducts(id: string) {
+  // Simulate an API call or database query
+  await new Promise(resolve => setTimeout(resolve, 100))
+  return products.filter(p => p.id !== id)
+}
+
+export default async function ProductPage({ params }: Params) {
   const { id } = params
 
-  const product = products.find(p => p.id === id) || products[0]
-  const featuredProducts = products.filter(p => p.id !== id)
+  const [product, featuredProducts] = await Promise.all([
+    getProduct(id),
+    getFeaturedProducts(id)
+  ])
+
   return (
     <Layout>
 
