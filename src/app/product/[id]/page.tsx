@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import Layout from "@/components/Layout"
 import { ShoppingCart } from "lucide-react"
-import { use } from 'react'
+
 
 const products = [
   {
@@ -50,17 +50,17 @@ const products = [
   },
 ]
 
+type Params = {
+  params: {
+    id: string
+  }
+}
 
-export default function ProductPage({ 
-  params 
-}: { 
-  params: { id: string } | Promise<{ id: string }> 
-}) {
-  const { id } = params instanceof Promise ? use(params) : params
+export default function ProductPage({ params }: Params) {
+  const { id } = params
 
   const product = products.find(p => p.id === id) || products[0]
   const featuredProducts = products.filter(p => p.id !== id)
-
   return (
     <Layout>
 
