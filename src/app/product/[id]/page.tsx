@@ -52,7 +52,7 @@ const products = [
 
 type Params = {
   params: {
-    id: string
+    id: any
   }
 }
 
